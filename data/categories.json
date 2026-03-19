@@ -1,0 +1,50 @@
+[
+  {
+    "id": "cat-ramos",
+    "name": "Ramos",
+    "slug": "ramos",
+    "description": "Ramos elegantes para sorprender en cualquier ocasión.",
+    "image": "https://images.unsplash.com/photo-1527061011665-3652c757a4d4?auto=format&fit=crop&w=900&q=80",
+    "active": true
+  },
+  {
+    "id": "cat-cumpleanos",
+    "name": "Cumpleaños",
+    "slug": "cumpleanos",
+    "description": "Arreglos vibrantes y llenos de color para celebrar.",
+    "image": "https://images.unsplash.com/photo-1526045431048-f857369baa09?auto=format&fit=crop&w=900&q=80",
+    "active": true
+  },
+  {
+    "id": "cat-aniversarios",
+    "name": "Aniversarios",
+    "slug": "aniversarios",
+    "description": "Diseños románticos para momentos inolvidables.",
+    "image": "https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?auto=format&fit=crop&w=900&q=80",
+    "active": true
+  },
+  {
+    "id": "cat-condolencias",
+    "name": "Condolencias",
+    "slug": "condolencias",
+    "description": "Detalles sobrios y respetuosos para acompañar.",
+    "image": "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=80",
+    "active": true
+  },
+  {
+    "id": "cat-regalos",
+    "name": "Regalos",
+    "slug": "regalos",
+    "description": "Peluches, globos y accesorios que complementan tu detalle.",
+    "image": "https://images.unsplash.com/photo-1513278974582-3e1b4a4fa21d?auto=format&fit=crop&w=900&q=80",
+    "active": true
+  },
+  {
+    "id": "cat-decoracion",
+    "name": "Decoración",
+    "slug": "decoracion",
+    "description": "Piezas decorativas y arreglos para tu espacio.",
+    "image": "https://images.unsplash.com/photo-1468327768560-75b778cbb551?auto=format&fit=crop&w=900&q=80",
+    "active": true
+  }
+]
