@@ -1,151 +1,118 @@
-# Floristeria Web - Fase 3
+# Floristería Web
 
-Proyecto base en **Next.js + Tailwind CSS** con:
+Sitio web de floristería desarrollado con **Next.js** y **Tailwind
+CSS**, con catálogo público y panel de administración para gestionar
+productos.
 
-- Sitio público para la floristería
-- Panel administrador privado
-- CRUD de productos
-- Botón de admin oculto para usuarios finales
-- Modo local con JSON para pruebas
-- Integración opcional con **Supabase** para base de datos real e imágenes reales
+## Características
 
-## 1. Requisitos
+-   Página principal moderna
+-   Catálogo de productos
+-   Categorías de productos
+-   Panel de administración
+-   Crear, editar y eliminar productos
+-   Activar o desactivar productos
+-   Marcar productos como destacados
+-   Subida de imágenes
+-   Integración con Supabase
 
-Necesitas:
+## Tecnologías
 
-- **Node.js LTS** instalado
-- npm funcionando
+-   Next.js
+-   React
+-   Tailwind CSS
+-   Supabase
 
-No necesitas instalar ningún programa adicional en tu PC aparte de Node.js.
+## Instalación
 
-## 2. Instalación
+Clona el proyecto y entra a la carpeta:
 
-Abre una terminal dentro de la carpeta del proyecto y ejecuta:
+git clone https://github.com/jair1c/floristeria-web.git cd
+floristeria-web
 
-```bash
+Instala dependencias:
+
 npm install
+
+Inicia el entorno de desarrollo:
+
 npm run dev
-```
 
-Luego abre:
+Abre en el navegador:
 
-```bash
 http://localhost:3000
-```
 
-## 3. Acceso al panel administrador
+## Variables de entorno
 
-Ruta:
+Crea un archivo `.env.local` en la raíz del proyecto con esta
+estructura:
 
-```bash
-http://localhost:3000/admin/login
-```
+NEXT_PUBLIC_SUPABASE_URL=tu_url_de_supabase
+NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_anon_key
+NEXT_PUBLIC_SUPABASE_BUCKET=product-images
 
-Credenciales por defecto:
+ADMIN_EMAIL=tu_correo_admin ADMIN_PASSWORD=tu_clave_admin
 
-```bash
-Correo: admin@floreriaaura.com
-Contraseña: Admin123*
-```
+## Panel de administración
 
-## 4. Cambiar credenciales
+Ruta de acceso:
 
-Crea un archivo `.env.local` en la raíz con este contenido:
+/admin/login
 
-```env
-ADMIN_EMAIL=tucorreo@dominio.com
-ADMIN_PASSWORD=TuClaveSegura123
-```
+Las credenciales del administrador se configuran únicamente en el
+archivo `.env.local`.
 
-Luego reinicia el servidor.
+## Configuración de Supabase
 
-## 5. Cómo funciona esta fase
+### 1. Crear proyecto
 
-### Modo local
-Si no configuras Supabase todavía, el proyecto sigue funcionando y guardará productos en:
+Crea un proyecto en Supabase.
 
-```bash
-data/products.json
-```
+### 2. Ejecutar el esquema SQL
 
-### Modo producción real con Supabase
-Si completas la configuración de Supabase:
+Usa el archivo correspondiente del proyecto para crear las tablas
+necesarias.
 
-- los productos se guardarán en una base de datos real
-- las imágenes se podrán subir desde el panel
-- los datos dejarán de depender de tu PC
+### 3. Crear bucket de imágenes
 
-## 6. Configurar Supabase
+Crea un bucket público llamado:
 
-### Paso 1: crear tu proyecto en Supabase
-Crea una cuenta y un proyecto en Supabase.
-
-### Paso 2: crear tablas y bucket
-Dentro del zip te dejé este archivo:
-
-```bash
-supabase/schema.sql
-```
-
-Copia ese SQL y ejecútalo en el SQL Editor de Supabase.
-
-Luego crea un bucket público llamado:
-
-```bash
 product-images
-```
 
-### Paso 3: obtener credenciales
-En Supabase, copia estos valores:
+### 4. Configurar policies
 
-- Project URL
-- service_role key
+Debes permitir al menos:
 
-### Paso 4: crear `.env.local`
-Ejemplo:
+-   INSERT
+-   SELECT
 
-```env
-ADMIN_EMAIL=admin@floreriaaura.com
-ADMIN_PASSWORD=Admin123*
-SUPABASE_URL=https://TU-PROYECTO.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key
-SUPABASE_PRODUCTS_BUCKET=product-images
-```
+para el bucket de imágenes, según la configuración de tu proyecto.
 
-### Paso 5: reiniciar el proyecto
-Después de guardar `.env.local`, reinicia:
+## Estructura general
 
-```bash
-npm run dev
-```
+app/ components/ lib/ public/ data/ supabase/
 
-## 7. Qué cambia cuando Supabase está activo
+## Notas
 
-- el botón de Panel Admin ya no aparece en la web pública
-- el acceso admin queda solo por URL directa
-- crear, editar y eliminar productos funciona sobre Supabase
-- puedes pegar una URL de imagen o subir una imagen desde tu PC
-- si subes un archivo, se guardará en Supabase Storage
+-   No subas `.env.local` al repositorio.
+-   No subas `node_modules`.
+-   No subas `.next`.
+-   Configura las variables de entorno también en Vercel al momento del
+    despliegue.
 
-## 8. Rutas importantes
+## Deploy
 
-```bash
-/                   -> página principal
-/productos          -> catálogo
-/categoria/[slug]   -> categorías
-/admin/login        -> login administrador
-/admin/dashboard    -> panel
-/admin/productos    -> lista de productos
-```
+Este proyecto puede desplegarse fácilmente en **Vercel** conectando el
+repositorio de GitHub y agregando las variables de entorno del archivo
+`.env.local`.
 
-## 9. Nota honesta
+## Estado del proyecto
 
-Esta fase ya deja el proyecto listo para trabajar como demo o como base seria de producción.
+Base funcional con catálogo público y administración de productos.
+Preparado para futuras mejoras como:
 
-Lo siguiente recomendable sería:
-
-- CRUD de categorías desde el panel
-- pedidos reales
-- integración con WhatsApp con mensaje automático por producto
-- deploy en Vercel
-- dominios y SEO
+-   carrito de compras
+-   pedidos por WhatsApp
+-   pagos en línea
+-   dashboard más avanzado
+-   dominio personalizado
