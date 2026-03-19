@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Flower2, ShoppingBag } from 'lucide-react';
+import { WHATSAPP_PHONE } from '@/lib/whatsapp';
 
 const links = [
   { href: '/', label: 'Inicio' },
@@ -31,7 +32,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <a href="https://wa.me/51999999999" target="_blank" className="btn-primary" rel="noreferrer">
+          <a href={`https://wa.me/${WHATSAPP_PHONE}`} target="_blank" className="btn-primary" rel="noreferrer">
             Pedir por WhatsApp
           </a>
           <button className="flex h-11 w-11 items-center justify-center rounded-full border border-rose-200 bg-white text-ink transition hover:border-roseBrand hover:text-roseBrand" aria-label="Carrito próximamente">

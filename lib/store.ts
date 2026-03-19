@@ -111,6 +111,11 @@ export async function getProductById(id: string) {
   return products.find((product) => product.id === id) ?? null;
 }
 
+export async function getProductBySlug(slug: string) {
+  const products = await getAllProducts();
+  return products.find((product) => product.slug === slug) ?? null;
+}
+
 export async function createProduct(input: ProductInput) {
   const categories = await getAllCategories();
   const products = await getAllProducts();

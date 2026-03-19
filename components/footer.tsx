@@ -1,3 +1,5 @@
+import { WHATSAPP_PHONE } from '@/lib/whatsapp';
+
 export function Footer() {
   return (
     <footer className="mt-20 border-t border-rose-100 bg-white">
@@ -12,7 +14,7 @@ export function Footer() {
         <div>
           <h4 className="font-semibold">Contacto</h4>
           <ul className="mt-3 space-y-2 text-sm text-neutral-600">
-            <li>WhatsApp: +51 999 999 999</li>
+            <li>WhatsApp: +{WHATSAPP_PHONE}</li>
             <li>Correo: ventas@floreriaaura.com</li>
             <li>Dirección: Lima, Perú</li>
           </ul>
