@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createOrder } from '@/lib/orders';
+import { sendOrderNotification } from '@/lib/email';
 import type { OrderInput } from '@/lib/types';
 
 export async function POST(req: NextRequest) {
@@ -16,6 +17,9 @@ export async function POST(req: NextRequest) {
     }
 
     const order = await createOrder(body);
+
+    // Enviar notificación al admin (no bloqueante)
+    await sendOrderNotification(order);
 
     return NextResponse.json({ orderId: order.id, success: true });
   } catch (err) {

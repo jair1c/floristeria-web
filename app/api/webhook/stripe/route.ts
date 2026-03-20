@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { updateOrderStripeSession } from '@/lib/orders';
+import { updateOrderStripeSession, getOrderById } from '@/lib/orders';
+import { sendOrderNotification } from '@/lib/email';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2026-02-25.clover',
@@ -27,6 +28,10 @@ export async function POST(req: NextRequest) {
       try {
         await updateOrderStripeSession(orderId, session.id);
         console.log(`[webhook] Pedido ${orderId} marcado como pagado`);
+
+        // Enviar notificación al admin
+        const order = await getOrderById(orderId);
+        if (order) await sendOrderNotification(order);
       } catch (err) {
         console.error('[webhook] Error actualizando pedido:', err);
       }
