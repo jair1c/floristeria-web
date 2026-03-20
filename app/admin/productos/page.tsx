@@ -3,6 +3,8 @@ import { Pencil, Plus, Star, Trash2 } from 'lucide-react';
 import { deleteProductAction, toggleProductActiveAction, toggleProductFeaturedAction } from '@/app/admin/actions';
 import { getAllProducts } from '@/lib/store';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminProductosPage({
   searchParams
 }: {
