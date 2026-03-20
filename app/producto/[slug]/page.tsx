@@ -65,7 +65,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
   const relatedProducts = (await getProductsByCategorySlug(product.categorySlug))
     .filter((item) => item.id !== product.id)
-    .slice(0, 4);
+    .slice(0, 3);
 
   return (
     <>
@@ -138,7 +138,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               <h2 className="mt-2 text-3xl font-bold">Productos relacionados</h2>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <div className="grid items-start gap-6 md:grid-cols-2 xl:grid-cols-3">
               {relatedProducts.map((item) => (
                 <ProductCard key={item.id} product={item} />
               ))}
