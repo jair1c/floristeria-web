@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { LayoutDashboard, PackagePlus, PackageSearch } from 'lucide-react';
+import { LayoutDashboard, PackagePlus, PackageSearch, ShoppingCart } from 'lucide-react';
 import { LogoutButton } from '@/components/admin/logout-button';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -18,6 +18,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </Link>
             <Link href="/admin/productos" className="pill-link inline-flex items-center gap-2">
               <PackageSearch className="h-4 w-4" /> Productos
+            </Link>
+            {/* ← NUEVO: enlace a Pedidos */}
+            <Link href="/admin/pedidos" className="pill-link inline-flex items-center gap-2">
+              <ShoppingCart className="h-4 w-4" /> Pedidos
             </Link>
             <Link href="/admin/productos/nuevo" className="btn-primary inline-flex items-center gap-2">
               <PackagePlus className="h-4 w-4" /> Nuevo producto

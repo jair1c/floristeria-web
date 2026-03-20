@@ -6,6 +6,7 @@ import { ArrowLeft, MessageCircle } from 'lucide-react';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { ProductCard } from '@/components/product-card';
+import { BuyButton } from '@/components/buy-button';
 import { getActiveProducts, getProductBySlug, getProductsByCategorySlug } from '@/lib/store';
 import { getProductUrl, getWhatsAppLink } from '@/lib/whatsapp';
 
@@ -23,9 +24,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   const product = await getProductBySlug(slug);
 
   if (!product) {
-    return {
-      title: 'Producto no encontrado | Florería Aura'
-    };
+    return { title: 'Producto no encontrado | Florería Aura' };
   }
 
   const title = `${product.name} | Florería Aura`;
@@ -39,21 +38,14 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       title,
       description,
       url,
-      images: [
-        {
-          url: product.image,
-          width: 1200,
-          height: 630,
-          alt: product.name
-        }
-      ]
+      images: [{ url: product.image, width: 1200, height: 630, alt: product.name }],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [product.image]
-    }
+      images: [product.image],
+    },
   };
 }
 
@@ -100,15 +92,20 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               </span>
             </div>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {/* ─── Botones de compra ─── */}
+            <div className="mt-8 grid gap-4">
+              {/* Botón principal: abre el modal de checkout */}
+              <BuyButton product={product} />
+
+              {/* Alternativa por WhatsApp */}
               <a
                 href={getWhatsAppLink(product)}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-green-600 px-5 py-4 text-base font-semibold text-white transition hover:bg-green-700"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-green-200 bg-green-50 px-5 py-4 text-base font-semibold text-green-700 transition hover:bg-green-600 hover:text-white"
               >
                 <MessageCircle className="h-5 w-5" />
-                Comprar por WhatsApp
+                Consultar por WhatsApp
               </a>
 
               <Link
@@ -120,10 +117,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             </div>
 
             <div className="mt-8 rounded-[1rem] border border-rose-100 bg-blush p-5">
-              <h2 className="font-semibold">Sobre este producto</h2>
+              <h2 className="font-semibold">🔒 Pago seguro</h2>
               <p className="mt-2 text-sm text-neutral-700">
-                La vista previa en WhatsApp se genera al compartir el enlace de este producto. Por eso esta página
-                incluye título, descripción e imagen listos para mostrarse correctamente al enviarlo.
+                Aceptamos Yape, Plin y tarjeta de crédito/débito. Tu información está protegida.
               </p>
             </div>
           </div>
