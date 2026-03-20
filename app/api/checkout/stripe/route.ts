@@ -4,7 +4,7 @@ import { createOrder } from '@/lib/orders';
 import type { OrderInput } from '@/lib/types';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-02-24.acacia',
+  apiVersion: '2026-02-25.clover',
 });
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
