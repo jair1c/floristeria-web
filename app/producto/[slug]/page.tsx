@@ -10,8 +10,8 @@ import { BuyButton } from '@/components/buy-button';
 import { getActiveProducts, getProductBySlug, getProductsByCategorySlug } from '@/lib/store';
 import { getProductUrl, getWhatsAppLink } from '@/lib/whatsapp';
 
-// Renderizado dinámico — evita timeout de Supabase durante el build
-export const dynamic = 'force-dynamic';
+// Caché: regenera la página cada 5 minutos en Vercel
+export const revalidate = 300;
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;

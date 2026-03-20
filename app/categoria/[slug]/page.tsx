@@ -4,8 +4,9 @@ import { Header } from '@/components/header';
 import { ProductCard } from '@/components/product-card';
 import { getCategories, getCategoryBySlug, getProductsByCategorySlug } from '@/lib/store';
 
-// Renderizado dinámico — evita timeout de Supabase durante el build
-export const dynamic = 'force-dynamic';
+// Caché: regenera la página cada 5 minutos en Vercel
+// Mucho más rápido que force-dynamic (que consulta Supabase en cada visita)
+export const revalidate = 300;
 
 type CategoryPageProps = {
   params: Promise<{ slug: string }>;
@@ -16,7 +17,6 @@ export async function generateStaticParams() {
     const categories = await getCategories();
     return categories.map((category) => ({ slug: category.slug }));
   } catch {
-    // Si Supabase falla durante el build, no pre-generamos nada
     return [];
   }
 }
@@ -25,7 +25,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = await params;
   const [category, products] = await Promise.all([
     getCategoryBySlug(slug),
-    getProductsByCategorySlug(slug)
+    getProductsByCategorySlug(slug),
   ]);
 
   if (!category || !category.active) notFound();
