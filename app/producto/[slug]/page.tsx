@@ -10,13 +10,20 @@ import { BuyButton } from '@/components/buy-button';
 import { getActiveProducts, getProductBySlug, getProductsByCategorySlug } from '@/lib/store';
 import { getProductUrl, getWhatsAppLink } from '@/lib/whatsapp';
 
+// Renderizado dinámico — evita timeout de Supabase durante el build
+export const dynamic = 'force-dynamic';
+
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  const products = await getActiveProducts();
-  return products.map((product) => ({ slug: product.slug }));
+  try {
+    const products = await getActiveProducts();
+    return products.map((product) => ({ slug: product.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
@@ -92,12 +99,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               </span>
             </div>
 
-            {/* ─── Botones de compra ─── */}
             <div className="mt-8 grid gap-4">
-              {/* Botón principal: abre el modal de checkout */}
               <BuyButton product={product} />
 
-              {/* Alternativa por WhatsApp */}
               <a
                 href={getWhatsAppLink(product)}
                 target="_blank"
@@ -133,7 +137,6 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               </p>
               <h2 className="mt-2 text-3xl font-bold">Productos relacionados</h2>
             </div>
-
             <div className="grid items-start gap-6 md:grid-cols-2 xl:grid-cols-3">
               {relatedProducts.map((item) => (
                 <ProductCard key={item.id} product={item} />

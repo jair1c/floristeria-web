@@ -4,13 +4,21 @@ import { Header } from '@/components/header';
 import { ProductCard } from '@/components/product-card';
 import { getCategories, getCategoryBySlug, getProductsByCategorySlug } from '@/lib/store';
 
+// Renderizado dinámico — evita timeout de Supabase durante el build
+export const dynamic = 'force-dynamic';
+
 type CategoryPageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  const categories = await getCategories();
-  return categories.map((category) => ({ slug: category.slug }));
+  try {
+    const categories = await getCategories();
+    return categories.map((category) => ({ slug: category.slug }));
+  } catch {
+    // Si Supabase falla durante el build, no pre-generamos nada
+    return [];
+  }
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
