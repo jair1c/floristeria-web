@@ -3,9 +3,10 @@ import { Header } from '@/components/header';
 import { ProductCard } from '@/components/product-card';
 import { getActiveProducts } from '@/lib/store';
 
+export const revalidate = 300;
+
 export default async function ProductosPage() {
   const products = await getActiveProducts();
-
   return (
     <>
       <Header />
@@ -17,7 +18,6 @@ export default async function ProductosPage() {
             Los productos que veas aquí se administran desde el panel privado. Solo se muestran los productos activos.
           </p>
         </div>
-
         <div className="grid items-start gap-6 md:grid-cols-2 xl:grid-cols-3">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
