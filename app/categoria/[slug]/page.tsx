@@ -4,13 +4,7 @@ import { Header } from '@/components/header';
 import { ProductCard } from '@/components/product-card';
 import { getCategories, getCategoryBySlug, getProductsByCategorySlug } from '@/lib/store';
 
-// Caché: regenera la página cada 5 minutos en Vercel
-// Mucho más rápido que force-dynamic (que consulta Supabase en cada visita)
-export const revalidate = 300;
-
-type CategoryPageProps = {
-  params: Promise<{ slug: string }>;
-};
+export const dynamic = 'force-dynamic';
 
 export async function generateStaticParams() {
   try {
@@ -21,11 +15,11 @@ export async function generateStaticParams() {
   }
 }
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
+export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const [category, products] = await Promise.all([
-    getCategoryBySlug(slug),
-    getProductsByCategorySlug(slug),
+    getCategoryBySlug(slug).catch(() => null),
+    getProductsByCategorySlug(slug).catch(() => []),
   ]);
 
   if (!category || !category.active) notFound();
@@ -39,7 +33,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           <h1 className="mt-2 text-4xl font-bold">{category.name}</h1>
           <p className="mt-4 max-w-2xl text-neutral-600">{category.description}</p>
         </div>
-
         {products.length ? (
           <div className="grid items-start gap-6 md:grid-cols-2 xl:grid-cols-3">
             {products.map((product) => (

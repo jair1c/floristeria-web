@@ -9,12 +9,13 @@ import { benefits, testimonials } from '@/lib/data';
 import { getCategories, getFeaturedProducts } from '@/lib/store';
 import { WHATSAPP_PHONE } from '@/lib/whatsapp';
 
-export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
+  // Fallback silencioso si Supabase no responde en build time
   const [categories, featuredProducts] = await Promise.all([
-    getCategories(),
-    getFeaturedProducts()
+    getCategories().catch(() => []),
+    getFeaturedProducts().catch(() => []),
   ]);
 
   return (

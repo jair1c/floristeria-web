@@ -3,10 +3,10 @@ import { Header } from '@/components/header';
 import { ProductCard } from '@/components/product-card';
 import { getActiveProducts } from '@/lib/store';
 
-export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 export default async function ProductosPage() {
-  const products = await getActiveProducts();
+  const products = await getActiveProducts().catch(() => []);
   return (
     <>
       <Header />
