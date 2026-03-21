@@ -83,7 +83,7 @@ export const metadata: Metadata = {
   // ─── Verificación Google Search Console ──────────────────────
   // Descomenta y pega tu código cuando lo tengas:
   // verification: {
-  //   google: 'TU_CODIGO_DE_VERIFICACION_AQUI',
+  //   google: 'google-site-verification=GVBXx9xvUvRptlA7ikw5QNmxUen0tss8_7HWzOagKOA',
   // },
 };
 
