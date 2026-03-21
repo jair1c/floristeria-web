@@ -82,9 +82,9 @@ export const metadata: Metadata = {
 
   // ─── Verificación Google Search Console ──────────────────────
   // Descomenta y pega tu código cuando lo tengas:
-  // verification: {
-  //   google: 'google-site-verification=GVBXx9xvUvRptlA7ikw5QNmxUen0tss8_7HWzOagKOA',
-  // },
+  verification: {
+    google: 'QKMOcz-7qtwwfXs_I6rjo-XdHMQDd5yB2fVd1zgUOZc',
+  },
 };
 
 // ─── Schema.org — datos estructurados ────────────────────────────
