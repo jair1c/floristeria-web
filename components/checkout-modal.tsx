@@ -158,8 +158,8 @@ export function CheckoutModal({ product, quantity, onClose }: Props) {
                 active={method === 'stripe'}
                 onClick={() => setMethod('stripe')}
                 emoji="💳"
-                label="Tarjeta de crédito / débito"
-                desc="Visa, Mastercard — pago seguro"
+                label="Tarjeta Visa / Mastercard"
+                desc="Pago seguro con tarjeta"
                 icon={<CreditCard className="h-5 w-5 text-indigo-500" />}
               />
 
@@ -254,14 +254,15 @@ export function CheckoutModal({ product, quantity, onClose }: Props) {
                 </p>
               </div>
 
-              <p className="text-sm text-neutral-600">
+              <p className="text-sm text-neutral-600 text-center">
                 Escanea el QR o envía{' '}
-                <span className="font-bold text-ink">S/ {total.toFixed(2)}</span> al número{' '}
-                <span className="font-bold">{method === 'yape' ? YAPE_PHONE : PLIN_PHONE}</span>
+                <span className="font-bold text-ink">S/ {total.toFixed(2)}</span>
+                {' '}al número{' '}
+                <span className="font-bold whitespace-nowrap">{method === 'yape' ? YAPE_PHONE : PLIN_PHONE}</span>
               </p>
 
               {/* QR image */}
-              <div className="mx-auto w-48 h-48 rounded-2xl overflow-hidden border-4 border-rose-100 relative bg-neutral-50 flex items-center justify-center">
+              <div className="mx-auto w-56 h-56 rounded-2xl overflow-hidden border-4 border-rose-100 relative bg-neutral-50 flex items-center justify-center">
                 <Image
                   src={method === 'yape' ? YAPE_QR_URL : PLIN_QR_URL}
                   alt={`QR ${method}`}
