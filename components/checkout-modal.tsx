@@ -272,7 +272,6 @@ export function CheckoutModal({ product, quantity, onClose }: Props) {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}
                 />
-                <p className="text-xs text-neutral-400 absolute">Sube tu QR a /public/</p>
               </div>
 
               <div className="rounded-2xl bg-amber-50 border border-amber-200 p-4 text-left text-sm text-amber-800">
